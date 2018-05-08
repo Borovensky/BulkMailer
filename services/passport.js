@@ -1,5 +1,6 @@
 const passropt = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const keys = require('../config/keys');
 const mongoose = require('mongoose');
 
@@ -18,6 +19,7 @@ passropt.deserializeUser((id, done) => {
 
 }); 
 
+// google oauth
 // console.developers.google.com
 passropt.use(new GoogleStrategy({
     clientID: keys.googleClientID,
@@ -38,4 +40,14 @@ passropt.use(new GoogleStrategy({
         }
     });
 
+}));
+
+// facebook oauth
+// developers.facebook.com
+passropt.use(new FacebookStrategy({
+    clientID: keys.facebookClientID,
+    clientSecret: keys.facebookClientSecret,
+    callbackURL: '/auth/facebook/callback'
+}, accessToken => {
+    console.log(accessToken);
 }));
