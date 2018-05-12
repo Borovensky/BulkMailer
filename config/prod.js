@@ -11,5 +11,9 @@ module.exports = {
     mongodbURI:  process.env.MONGO_URI,
 
     // cookieKey can be an absolutely random string of characters.
-    cookieKey:  process.env.COOKIE_KEY
+    cookieKey:  process.env.COOKIE_KEY,
+
+    // Stirpe Key (billing system)
+    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+    stripeSecretKey: process.env.STRIPE_SECRET_KEY
 };

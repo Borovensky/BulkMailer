@@ -7,7 +7,13 @@ module.exports = (app) => {
         scope: ['profile', 'email']
     }));
     
-    app.get('/auth/google/callback', passropt.authenticate('google'));
+    app.get(
+        '/auth/google/callback', 
+        passropt.authenticate('google'),
+        (req, res) => {
+            res.redirect('/surveys');
+        }
+    );
 
     // facebook auth routes
     app.get('/auth/facebook', passropt.authenticate('facebook', {
@@ -20,7 +26,7 @@ module.exports = (app) => {
     app.get('/api/logout', (req, res) => {
         // 'logout()' this is the staff from passport that kill the cookie.
         req.logout();
-        res.send(req.user);
+        res.redirect('/');
     });
 
     app.get('/api/current_user', (req, res) => {
